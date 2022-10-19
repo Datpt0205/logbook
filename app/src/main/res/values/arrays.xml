@@ -1,11 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="images">
-        <item>https://i.imgur.com/Q9WPlWA.jpeg</item>
-        <item>https://i.imgur.com/oPj4A8u.jpeg</item>
-        <item>https://i.imgur.com/MWAcQRM.jpeg</item>
-        <item>https://i.imgur.com/Lnt9K7l.jpeg</item>
-        <item>https://i.imgur.com/Gg6BpGn.jpeg</item>
-    </string-array>
-
 </resources>

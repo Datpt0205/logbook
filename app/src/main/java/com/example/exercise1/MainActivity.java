@@ -8,10 +8,12 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageView imageView;
-    private String[] imageList;
+    private ArrayList<String> list;
     private int index = 0;
 
     @Override
@@ -21,23 +23,26 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.image_view);
 
-        imageList = getResources().getStringArray(R.array.images);
-
-        String url = "https://i.imgur.com/Gg6BpGn.jpeg";
+        list = new ArrayList<String>();
+        list.add(0, "https://i.imgur.com/Q9WPlWA.jpeg");
+        list.add(1, "https://i.imgur.com/oPj4A8u.jpeg");
+        list.add(2, "https://i.imgur.com/MWAcQRM.jpeg");
+        list.add(3, "https://i.imgur.com/Lnt9K7l.jpeg");
+        list.add(4, "https://i.imgur.com/Gg6BpGn.jpeg");
 
         loadImage();
     }
 
     public void loadImage(){
         Glide.with(MainActivity.this)
-                .load(imageList[index])
+                .load(list.get(index))
                 .centerCrop()
                 .into(imageView);
     }
 
     public void nextImage(View view){
         index++;
-        if(index >= imageList.length)
+        if(index >= list.size())
             index = 0;
         loadImage();
     }
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public void previousImage(View view){
         index--;
         if(index <= -1)
-            index = imageList.length -1;
+            index = list.size() -1;
         loadImage();
     }
 }
