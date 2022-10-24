@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:text="Previous"
             android:layout_marginRight="20dp"
-            android:onClick="previousImage"
             tools:ignore="OnClick" />
 
         <Button
@@ -33,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Next"
-            android:onClick="nextImage"
             tools:ignore="OnClick" />
 
     </LinearLayout>
