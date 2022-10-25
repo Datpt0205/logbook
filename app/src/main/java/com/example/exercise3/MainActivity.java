@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> list = new ArrayList<String>();
     ArrayList<String> id = new ArrayList<String>();
     int index = 0;
+    int countTime = 0;
     Button addUrl, btn_next, btn_previous;
 
     @Override
@@ -119,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
     void storeUrl()
     {
+        countTime++;
+        reloadActivity(1000);
         Cursor cursor = db.showImage();
         if(cursor.getCount() == 0)
         {
@@ -132,6 +135,18 @@ public class MainActivity extends AppCompatActivity {
                 list.add(cursor.getString(1));
             }
         }
+    }
+
+    //update 1s then reload storeURL
+    private void reloadActivity(int miliseconds)
+    {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                storeUrl();
+            }
+        };
     }
 
 }

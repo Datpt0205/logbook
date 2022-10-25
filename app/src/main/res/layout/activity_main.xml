@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="330dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         tools:srcCompat="@tools:sample/avatars" />
