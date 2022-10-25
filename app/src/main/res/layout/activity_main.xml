@@ -9,9 +9,9 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="340dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         tools:srcCompat="@tools:sample/avatars" />
     <LinearLayout
         android:id="@+id/firstLinear"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/image_view"
         android:layout_centerHorizontal = "true"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/btn_previous"
@@ -38,44 +38,61 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_below="@id/firstLinear"
+        android:id="@+id/secondLinear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstLinear"
+        android:orientation="vertical">
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
             android:text="URL*"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <LinearLayout
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/url"
-                android:hint="URL"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50sp"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/addUrl"
-                android:text="Add URL"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="150dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50sp"
+            android:hint="URL" />
+
         <Button
-            android:id="@+id/cameraBtn"
+            android:id="@+id/addUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Camera"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="150dp"/>
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="10dp"
+            android:text="Add URL" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_below="@id/secondLinear"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cameraBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:text="Camera"
+/>
+
+            <Button
+                android:id="@+id/galleryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:text="Gallery"
+/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
