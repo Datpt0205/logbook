@@ -1,9 +1,12 @@
 package com.example.excersise4;
 
+import static android.os.Environment.getExternalStoragePublicDirectory;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -30,12 +33,25 @@ import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.excersise4.R;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.DexterBuilder;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +59,62 @@ public class MainActivity extends AppCompatActivity {
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
+//    @BindView(R.id.cameraBtn)
+//    Button cameraBtn;
+//    @BindView(R.id.image_view)
+//    ImageView image_view;
+//
+//    private Uri imageUri;
+//
+//    @OnClick(R.id.cameraBtn)
+//            void onCaptureImageClick(){
+//        Dexter.withContext(this)
+//                .withPermissions(Arrays.asList(
+//                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE,
+//                        Manifest.permission.CAMERA
+//                ))
+//                .withListener(new MultiplePermissionsListener(){
+//
+//                                  @Override
+//                                  public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                                      if(multiplePermissionsReport.areAllPermissionsGranted()){
+//                                          ContentValues cv = new ContentValues();
+//                                          cv.put(MediaStore.Images.Media.TITLE, "New Picture");
+//                                          cv.put(MediaStore.Images.Media.DESCRIPTION,"My Camera");
+//                                          imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
+//                                          Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                                          i.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//                                          startActivityForResult(i, CAMERA_REQUEST_CODE);
+//                                      }else{
+//                                          Toast.makeText(MainActivity.this, "You must accept all permission", Toast.LENGTH_SHORT).show();
+//                                      }
+//                                  }
+//
+//                                  @Override
+//                                  public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//
+//                                  }
+//                              }
+//                );
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == CAMERA_REQUEST_CODE){
+//            if(resultCode == Activity.RESULT_OK){
+//                try{
+//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+//                    image_view.setImageBitmap(bitmap);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     ImageView imageView;
     DatabaseHelper db;
@@ -52,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
     int index = 0;
     Button addUrl, btn_next, btn_previous, cameraBtn, galleryBtn;
     String currentPhotoPath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        //File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
